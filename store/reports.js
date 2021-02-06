@@ -1,5 +1,3 @@
-import { any } from "core-js/fn/promise"
-
 export const state = () => ({
     rewardingRating: Number,
     perceivedExertion: Number,
@@ -10,8 +8,8 @@ export const state = () => ({
     intensity: Number,
     symptoms: [],
     // created, submitted to provider, reviewed by provider
-    state = 'created',
-    activity: any,
+    state: 'created',
+    activity: '',
 })
 
 export const getters = {

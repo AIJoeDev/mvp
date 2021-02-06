@@ -2,7 +2,7 @@ export const state = () => ({
     type: String,
     desc: String,
     importance: Number,
-    iap = false,
+    iap: false,
 })
 
 export const getters = {

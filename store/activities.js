@@ -7,12 +7,12 @@ export const state = () => ({
     // don't know how to value intensity yet
     intensity: Number,
     // created, scheduled, unreported, r_complete, r_missed
-    state = 'created',
+    state: 'created',
     // reports filed under this activity
     reportsKeys: [],
     // symptoms known to be caused by this activity.
     symptomsKeys: [],
-    iap = false,
+    iap: false,
 })
 
 export const getters = {
