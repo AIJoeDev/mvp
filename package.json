@@ -13,9 +13,12 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.12.5",
+    "@nuxtjs/firebase": "^7.4.1",
     "@nuxtjs/pwa": "^3.3.5",
     "core-js": "^3.8.3",
-    "nuxt": "^2.14.12"
+    "firebase": "^8.2.6",
+    "nuxt": "^2.14.12",
+    "vuexfire": "^3.2.5"
   },
   "devDependencies": {
     "@ava/babel": "^1.0.1",
@@ -28,5 +31,9 @@
     "require-extension-hooks": "^0.3.3",
     "require-extension-hooks-babel": "^1.0.0",
     "require-extension-hooks-vue": "^3.0.0"
+  },
+  "peerDependencies": {
+    "vue": "^2.6.12",
+    "vue-template-compiler": "^2.6.12"
   }
 }
