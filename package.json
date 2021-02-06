@@ -10,8 +10,7 @@
     "test": "yarn test:unit && yarn test:e2e",
     "test:unit": "cross-env TEST=unit ava ./test/specs/**/*",
     "test:e2e": "cross-env TEST=e2e ava ./test/e2e/**/*",
-    "ci": "yarn build && yarn test",
-    "cd": "yarn ci && firebase:deploy"
+    "ci": "yarn build && yarn test"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.12.5",
