@@ -72,7 +72,7 @@ export default {
     }
   },
 
-  // firebase servie options 
+  // firebase service options 
   // https://firebase.nuxtjs.org/service-options/firestore
 
   // Initializes Firebase Firestore and makes it available via $fire.firestore and $fireModule.firestore.
