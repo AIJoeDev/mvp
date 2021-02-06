@@ -5,7 +5,6 @@ name: Deploy to Preview on PR
 on: 
   pull_request:
     branches:
-      - main
       - master
   # Optionally configure to run only for specific files. For example:
   # paths:
