@@ -21,7 +21,9 @@ test.before(async () => {
 // Example of testing only generated html
 test('Route / exits and render HTML', async (t) => {
   const { html } = await nuxt.renderRoute('/', {})
-  t.true(html.includes('Documentation'))
+  t.true(html.includes('AI Joe MVP Prototype'))
+  t.true(html.includes('Write to Firestore.'))
+  t.true(html.includes('Read from Firestore.'))
 })
 
 // Close server and ask nuxt to stop listening to file changes
