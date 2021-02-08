@@ -39,12 +39,12 @@ jobs:
         run: yarn
       - name: Build & Run tests 🧪
         run: yarn ci
-      - name: Upload Artifact
+      - name: Upload Artifacts
         uses: actions/upload-artifact@v2
         with:
+          name: mvp
           path: nuxt-dist
           if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn` 
-          retention-days: 1
 
   deploy_preview:
     needs: ci
@@ -54,12 +54,13 @@ jobs:
         os: [ubuntu-latest]
         node: [12]
     steps:
-      - name: checkout repo
+      - name: Checkout Repo
         uses: actions/checkout@v2
         # Add any build steps here. For example:
         # - run: npm ci && npm run build
       - name: Download Artifact
         uses: actions/download-artifact@v2
+          name: mvp
       - name: Display structure of downloaded files
         run: ls -R
       - name: Deploy to Firebase Hosting

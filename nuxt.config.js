@@ -112,5 +112,5 @@ export default {
       video: ({ isDev }) => isDev ? '[path][name].[ext]' : 'videos/[contenthash:7].[ext]'
     }
   },
-  buildDir: 'nuxt-dist'
+  buildDir: 'nuxt-dist/src'
 }
