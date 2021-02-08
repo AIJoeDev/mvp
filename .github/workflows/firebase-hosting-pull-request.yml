@@ -60,6 +60,7 @@ jobs:
         # - run: npm ci && npm run build
       - name: Download Artifact
         uses: actions/download-artifact@v2
+        with:
           name: mvp
       - name: Display structure of downloaded files
         run: ls -R
