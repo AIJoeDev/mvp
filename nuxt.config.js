@@ -17,7 +17,6 @@ export default {
     baseURL: process.env.BASE_URL || 'https://exercise-health.web.app/'
   },
   privateRuntimeConfig: {
-    apiKey: process.env.API_KEY,
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -82,7 +81,8 @@ export default {
     },
     // load the newest Firebase scripts in the service workers directly from hosting instead of www.gstatic.com.
     onFirebaseHosting: true
-    },
+  },
+  
   // firebase service options 
   // https://firebase.nuxtjs.org/service-options/firestore
 
@@ -94,13 +94,23 @@ export default {
     chunkName: process.env.NODE_ENV !== 'production' ? 'firebase-auth' : '[id]', 
     // Sets up useEmulator("localhost", EMULATOR_PORT) to point to a Firestore emulator running locally.
     emulatorPort: process.env.NODE_ENV === 'development' ? 8080 : undefined,
+    // only if emulatorPort is set
+    emulatorHost: 'localhost',
     // Enables persistence in web apps.
     enablePersistence: true,
-    // only if emulatorPort is set
-    emulatorHost: 'localhost'
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  }
+    devtools: true,
+    filenames: {
+      app: ({ isDev }) => isDev ? '[name].js' : '[contenthash].js',
+      chunk: ({ isDev }) => isDev ? '[name].js' : '[contenthash].js',
+      css: ({ isDev }) => isDev ? '[name].css' : '[contenthash].css',
+      img: ({ isDev }) => isDev ? '[path][name].[ext]' : 'img/[contenthash:7].[ext]',
+      font: ({ isDev }) => isDev ? '[path][name].[ext]' : 'fonts/[contenthash:7].[ext]',
+      video: ({ isDev }) => isDev ? '[path][name].[ext]' : 'videos/[contenthash:7].[ext]'
+    }
+  },
+  buildDir: 'nuxt-dist'
 }
