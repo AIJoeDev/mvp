@@ -11,35 +11,39 @@ on:
   # - "website/**"
 
 jobs:
-  # ci:
-  #   runs-on: ${{ matrix.os }}
-  #   strategy:
-  #     matrix:
-  #       os: [ubuntu-latest]
-  #       node: [14]
-  #   steps:
-  #     - name: Checkout 🛎
-  #       uses: actions/checkout@v2
-  #     - name: Setup node env 🏗
-  #       uses: actions/setup-node@v2.1.4
-  #       with:
-  #         node-version: ${{ matrix.node }}
-  #     - name: Get yarn cache directory path 🛠
-  #       id: yarn-cache-dir-path
-  #       run: echo "::set-output name=dir::$(yarn cache dir)"
-  #     - name: Cache node_modules 📦
-  #       uses: actions/cache@v2.1.4
-  #       id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-  #       with:
-  #         path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-  #         key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-  #         restore-keys: |
-  #           ${{ runner.os }}-yarn-
-  #     - name: Install dependencies 👨🏻‍💻
-  #       run: yarn
-  #     - name: Build & Run tests 🧪
-  #       run: yarn ci
-
+  ci:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [12]
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v2
+      - name: Setup node env 🏗
+        uses: actions/setup-node@v2.1.4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Get yarn cache directory path 🛠
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Cache node_modules 📦
+        uses: actions/cache@v2.1.4
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install dependencies 👨🏻‍💻
+        run: yarn
+      - name: Build & Run tests 🧪
+        run: yarn ci
+      - uses: actions/upload-artifact@v2
+        with:
+          path: nuxt-dist
+          if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn` 
+          retention-days: 1
 
   deploy_preview:
     # needs: ci
@@ -47,11 +51,16 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node: [14]
+        node: [12]
     steps:
+      - name: checkout repo
       - uses: actions/checkout@v2
         # Add any build steps here. For example:
         # - run: npm ci && npm run build
+      - name: Download Artifact
+      - uses: actions/download-artifact@v2
+      - name: Display structure of downloaded files
+        run: ls -R
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
