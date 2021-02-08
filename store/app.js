@@ -1,16 +1,12 @@
-import { vuexfireMutations } from 'vuexfire'
-import Vuex from 'vuex'
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-
-const store = new Vuex.Store({
-  mutations: {
-    // other mutations
-    ...vuexfireMutations,
-  },
+export const state = () => ({
+  
 })
 
-// Get a Firestore instance
-export const db = firebase
-  .initializeApp({ projectId: 'exercise-health' })
-  .firestore()
+export const getters = {
+}
+
+export const actions = {
+}
+
+export const mutations = {
+}

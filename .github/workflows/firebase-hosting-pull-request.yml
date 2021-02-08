@@ -16,7 +16,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node: [14]
+        node: [12]
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@v2
@@ -39,7 +39,12 @@ jobs:
         run: yarn
       - name: Build & Run tests 🧪
         run: yarn ci
-
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: mvp
+          path: nuxt-dist
+          if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn` 
 
   deploy_preview:
     needs: ci
@@ -47,12 +52,20 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node: [14]
+        node: [12]
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout Repo
+        uses: actions/checkout@v2
         # Add any build steps here. For example:
         # - run: npm ci && npm run build
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - name: Download Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: mvp
+      - name: Display structure of downloaded files
+        run: ls -R
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_EXERCISE_HEALTH }}'

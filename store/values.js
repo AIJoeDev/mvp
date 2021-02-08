@@ -1,8 +1,8 @@
 export const state = () => ({
-    type: String,
-    desc: String,
-    importance: Number,
-    iap = false,
+    // type: String,
+    // desc: String,
+    // importance: Number,
+    // iap: false,
 })
 
 export const getters = {
